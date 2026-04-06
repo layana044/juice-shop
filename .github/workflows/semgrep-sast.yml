@@ -1,0 +1,21 @@
+name: Semgrep SAST Scan
+
+on:
+  push:
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Semgrep
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install semgrep
+
+      - name: Run Semgrep Scan
+        run: |
+          semgrep scan --config auto .
